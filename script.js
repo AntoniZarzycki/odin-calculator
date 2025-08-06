@@ -150,7 +150,20 @@ function operatorPressed(id) {
 }
 
 function clearAll() {
-  console.log("Clear All");
+  const operatorDisplay = document.querySelector("#operator");
+  operatorDisplay.textContent = "";
+  operator = "";
+
+  const num1Display = document.querySelector("#num1");
+  num1Display.textContent = "";
+  num1 = 0;
+
+  const num2Display = document.querySelector("#num2");
+  num2Display.textContent = "";
+  num2 = 0;
+
+  const subDisplay = document.querySelector("#sub-display");
+  subDisplay.textContent = "";
 }
 
 function clear() {
