@@ -133,6 +133,10 @@ function numberPressed(number) {
   const operatorDisplay = document.querySelector("#operator");
 
   if (!operatorDisplay.textContent) {
+    if (result || result === 0) {
+      clearAll();
+    }
+
     num1Display.textContent += String(number);
     stateProxy.num1 = Number(num1Display.textContent);
   } else {
