@@ -110,7 +110,19 @@ function convertToNumber(string) {
 
 function numberPressed(number) {
   if (number === NaN) return;
-  console.log(number);
+  const num1Display = document.querySelector("#num1");
+  const num2Display = document.querySelector("#num2");
+  const operatorDisplay = document.querySelector("#operator");
+
+  if (!operatorDisplay.textContent) {
+    num1Display.textContent += String(number);
+    num1 = Number(num1Display.textContent);
+    console.log(num1);
+    console.log(typeof num1);
+  } else {
+    num2Display.textContent += String(number);
+    num2 = Number(num2Display.textContent);
+  }
 }
 
 function operatorPressed(id) {
