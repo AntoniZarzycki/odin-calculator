@@ -186,7 +186,23 @@ function clearAll() {
 }
 
 function clear() {
-  console.log("Clear");
+  if (stateProxy.num2 || stateProxy.num2 === 0) {
+    const num2Display = document.querySelector("#num2");
+    num2Display.textContent = "";
+    stateProxy.num2 = undefined;
+  } else if (stateProxy.operator) {
+    const operatorDisplay = document.querySelector("#operator");
+    operatorDisplay.textContent = "";
+    stateProxy.operator = "";
+  } else if (stateProxy.num1 || stateProxy.num1 === 0) {
+    const num1Display = document.querySelector("#num1");
+    num1Display.textContent = "";
+    stateProxy.num1 = undefined;
+  }
+
+  const subDisplay = document.querySelector("#sub-display");
+  subDisplay.textContent = "";
+  result = undefined;
 }
 
 function backspacePressed() {
