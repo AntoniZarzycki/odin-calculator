@@ -151,6 +151,8 @@ function operatorPressed(id) {
   if (operatorDisplay.textContent) return;
   if (!num1Display.textContent) return;
 
+  num1Display.classList.remove("text-green");
+
   switch (id) {
     case "add":
       operatorDisplay.textContent = "+";
@@ -179,6 +181,7 @@ function clearAll() {
   const num1Display = document.querySelector("#num1");
   num1Display.textContent = "";
   stateProxy.num1 = undefined;
+  num1Display.classList.remove("text-green");
 
   const num2Display = document.querySelector("#num2");
   num2Display.textContent = "";
@@ -202,6 +205,7 @@ function clear() {
     const num1Display = document.querySelector("#num1");
     num1Display.textContent = "";
     stateProxy.num1 = undefined;
+    num1Display.classList.remove("text-green");
   }
 
   const subDisplay = document.querySelector("#sub-display");
@@ -238,6 +242,8 @@ function equalPressed() {
   const num1Display = document.querySelector("#num1");
   num1Display.textContent = result;
   stateProxy.num1 = result;
+
+  num1Display.classList.add("text-green");
 }
 
 function calculateResult() {
