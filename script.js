@@ -271,6 +271,8 @@ function equalPressed() {
 function calculateResult() {
   result = operate(stateProxy.operator, stateProxy.num1, stateProxy.num2);
 
+  if (result.toString().length > 18) result = result.toExponential();
+
   const subDisplay = document.querySelector("#sub-display");
   subDisplay.textContent = result;
 }
