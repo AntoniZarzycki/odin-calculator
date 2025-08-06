@@ -119,6 +119,15 @@ button:hover {
   background-color: rgb(15, 180, 51);
 }
 
+.disabled {
+  cursor: default;
+  background-color: rgba(255, 0, 0, 0.1) !important;
+}
+
+.disabled:hover {
+  transform: none;
+}
+
 /* DIVIDER */
 #divider {
   width: 100%;
