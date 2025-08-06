@@ -202,7 +202,22 @@ function pointPressed() {
 }
 
 function equalPressed() {
-  console.log("Equal");
+  if (!stateProxy.num1 || !stateProxy.num2 || !stateProxy.operator) return;
+
+  const subDisplay = document.querySelector("#sub-display");
+  subDisplay.textContent = "";
+
+  const operatorDisplay = document.querySelector("#operator");
+  operatorDisplay.textContent = "";
+  stateProxy.operator = "";
+
+  const num2Display = document.querySelector("#num2");
+  num2Display.textContent = "";
+  stateProxy.num2 = undefined;
+
+  const num1Display = document.querySelector("#num1");
+  num1Display.textContent = result;
+  stateProxy.num1 = result;
 }
 
 function calculateResult() {
