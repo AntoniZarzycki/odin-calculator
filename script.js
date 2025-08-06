@@ -16,6 +16,16 @@ const stateProxy = new Proxy(state, {
     ) {
       calculateResult();
     }
+
+    const display = document.querySelector("#display");
+    if (
+      !(stateProxy.num1 === undefined) &&
+      stateProxy.num1.toString().length > 12
+    ) {
+      display.classList.add("text-small");
+    } else {
+      display.classList.remove("text-small");
+    }
     return true;
   },
 });

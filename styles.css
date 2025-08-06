@@ -50,6 +50,10 @@ body {
   color: rgb(0, 165, 36);
 }
 
+.text-small {
+  font-size: 32px !important;
+}
+
 span {
   transition: all 0.3s;
 }
