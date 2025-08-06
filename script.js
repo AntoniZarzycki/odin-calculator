@@ -117,8 +117,6 @@ function numberPressed(number) {
   if (!operatorDisplay.textContent) {
     num1Display.textContent += String(number);
     num1 = Number(num1Display.textContent);
-    console.log(num1);
-    console.log(typeof num1);
   } else {
     num2Display.textContent += String(number);
     num2 = Number(num2Display.textContent);
@@ -126,7 +124,29 @@ function numberPressed(number) {
 }
 
 function operatorPressed(id) {
-  console.log(id);
+  const operatorDisplay = document.querySelector("#operator");
+  const num1Display = document.querySelector("#num1");
+  if (operatorDisplay.textContent) return;
+  if (!num1Display.textContent) return;
+
+  switch (id) {
+    case "add":
+      operatorDisplay.textContent = "+";
+      operator = "+";
+      break;
+    case "subtract":
+      operatorDisplay.textContent = "-";
+      operator = "-";
+      break;
+    case "multiply":
+      operatorDisplay.textContent = "*";
+      operator = "*";
+      break;
+    case "divide":
+      operatorDisplay.textContent = "/";
+      operator = "/";
+      break;
+  }
 }
 
 function clearAll() {
