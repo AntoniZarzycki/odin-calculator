@@ -1,6 +1,24 @@
-let num1 = 0;
-let num2 = 0;
-let operator = "";
+let state = {
+  num1: undefined,
+  num2: undefined,
+  operator: "",
+};
+
+let result = undefined;
+
+const stateProxy = new Proxy(state, {
+  set(target, prop, value) {
+    target[prop] = value;
+    if (
+      !(stateProxy.num1 === undefined) &&
+      !(stateProxy.num2 === undefined) &&
+      !(stateProxy.operator === "")
+    ) {
+      calculateResult();
+    }
+    return true;
+  },
+});
 
 function add(num1, num2) {
   return num1 + num2;
@@ -116,10 +134,10 @@ function numberPressed(number) {
 
   if (!operatorDisplay.textContent) {
     num1Display.textContent += String(number);
-    num1 = Number(num1Display.textContent);
+    stateProxy.num1 = Number(num1Display.textContent);
   } else {
     num2Display.textContent += String(number);
-    num2 = Number(num2Display.textContent);
+    stateProxy.num2 = Number(num2Display.textContent);
   }
 }
 
@@ -132,19 +150,19 @@ function operatorPressed(id) {
   switch (id) {
     case "add":
       operatorDisplay.textContent = "+";
-      operator = "+";
+      stateProxy.operator = "+";
       break;
     case "subtract":
       operatorDisplay.textContent = "-";
-      operator = "-";
+      stateProxy.operator = "-";
       break;
     case "multiply":
       operatorDisplay.textContent = "*";
-      operator = "*";
+      stateProxy.operator = "*";
       break;
     case "divide":
       operatorDisplay.textContent = "/";
-      operator = "/";
+      stateProxy.operator = "/";
       break;
   }
 }
@@ -152,18 +170,19 @@ function operatorPressed(id) {
 function clearAll() {
   const operatorDisplay = document.querySelector("#operator");
   operatorDisplay.textContent = "";
-  operator = "";
+  stateProxy.operator = "";
 
   const num1Display = document.querySelector("#num1");
   num1Display.textContent = "";
-  num1 = 0;
+  stateProxy.num1 = undefined;
 
   const num2Display = document.querySelector("#num2");
   num2Display.textContent = "";
-  num2 = 0;
+  stateProxy.num2 = undefined;
 
   const subDisplay = document.querySelector("#sub-display");
   subDisplay.textContent = "";
+  result = undefined;
 }
 
 function clear() {
@@ -184,4 +203,11 @@ function pointPressed() {
 
 function equalPressed() {
   console.log("Equal");
+}
+
+function calculateResult() {
+  result = operate(stateProxy.operator, stateProxy.num1, stateProxy.num2);
+
+  const subDisplay = document.querySelector("#sub-display");
+  subDisplay.textContent = result;
 }
