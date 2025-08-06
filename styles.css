@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(3, 25, 44);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Roboto, "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+}
+
+#calculator {
+  background-color: rgb(10, 10, 10);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  max-width: 370px;
+}
+
+/* DISPLAY */
+#display-container {
+  width: 100%;
+  height: 275px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 20px;
+  font-weight: 700;
+}
+
+#display {
+  color: rgb(214, 220, 226);
+  font-size: 48px;
+}
+
+#sub-display {
+  color: rgb(110, 110, 110);
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.text-green {
+  color: rgb(0, 165, 36);
+}
+
+span {
+  transition: all 0.3s;
+}
+
+#operator {
+  font-weight: 500;
+}
+
+/* BUTTONS */
+#btn-container {
+  display: grid;
+  grid-template: repeat(5, 1fr) / repeat(4, 1fr);
+}
+
+button {
+  width: 75px;
+  height: 75px;
+  margin: 5px;
+  border-radius: 50%;
+  border: 0;
+  background-color: rgb(15, 15, 15);
+  font-size: 35px;
+  font-weight: 700;
+  color: rgb(189, 194, 199);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+button:hover {
+  transform: scale(1.2);
+  background-color: rgb(25, 25, 25);
+}
+
+#delete {
+  font-size: 30px;
+}
+
+.gray {
+  background-color: rgb(34, 34, 34);
+}
+
+.gray:hover {
+  background-color: rgb(44, 44, 44);
+}
+
+.white {
+  background-color: rgb(189, 194, 199);
+  color: rgb(15, 15, 15);
+}
+
+.white:hover {
+  background-color: rgb(214, 219, 224);
+}
+
+.green {
+  background-color: rgb(0, 165, 36);
+}
+
+.green:hover {
+  background-color: rgb(15, 180, 51);
+}
+
+/* DIVIDER */
+#divider {
+  width: 100%;
+  height: 3px;
+  background-color: rgb(53, 53, 53);
+  border-radius: 10px;
+  margin: 20px;
+}
