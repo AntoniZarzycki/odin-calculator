@@ -147,9 +147,21 @@ function numberPressed(number) {
       clearAll();
     }
 
+    if (
+      !(stateProxy.num1 === undefined) &&
+      stateProxy.num1.toString().length >= 18
+    )
+      return;
+
     num1Display.textContent += String(number);
     stateProxy.num1 = Number(num1Display.textContent);
   } else {
+    if (
+      !(stateProxy.num2 === undefined) &&
+      stateProxy.num2.toString().length >= 18
+    )
+      return;
+
     num2Display.textContent += String(number);
     stateProxy.num2 = Number(num2Display.textContent);
   }
