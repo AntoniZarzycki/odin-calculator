@@ -5,6 +5,7 @@ let state = {
 };
 
 let result = undefined;
+let allowPoint = true;
 
 const stateProxy = new Proxy(state, {
   set(target, prop, value) {
@@ -23,6 +24,19 @@ const stateProxy = new Proxy(state, {
     } else {
       display.classList.remove("text-small");
     }
+
+    const pointButton = document.querySelector("#point");
+    if (stateProxy.operator && stateProxy.num2.includes(".")) {
+      pointButton.classList.add("disabled");
+      allowPoint = false;
+    } else if (!stateProxy.operator && stateProxy.num1.includes(".")) {
+      pointButton.classList.add("disabled");
+      allowPoint = false;
+    } else {
+      pointButton.classList.remove("disabled");
+      allowPoint = true;
+    }
+
     return true;
   },
 });
@@ -233,7 +247,7 @@ function bracketsPressed() {
 }
 
 function pointPressed() {
-  console.log("Point");
+  if (allowPoint) numberPressed(".");
 }
 
 function equalPressed() {
