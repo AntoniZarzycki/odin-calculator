@@ -239,7 +239,40 @@ function clear() {
 }
 
 function backspacePressed() {
-  console.log("Backspace");
+  result = undefined;
+
+  if (stateProxy.operator && stateProxy.num2) {
+    const arr = Array.from(stateProxy.num2);
+    arr.pop();
+
+    const num2Display = document.querySelector("#num2");
+    num2Display.textContent = arr.join("");
+
+    stateProxy.num2 = num2Display.textContent;
+  } else if (stateProxy.operator) {
+    const operatorDisplay = document.querySelector("#operator");
+    operatorDisplay.textContent = "";
+    stateProxy.operator = "";
+  } else if (stateProxy.num1) {
+    const arr = Array.from(stateProxy.num1);
+    arr.pop();
+
+    const num1Display = document.querySelector("#num1");
+    num1Display.textContent = arr.join("");
+
+    stateProxy.num1 = num1Display.textContent;
+  }
+
+  if (
+    !(stateProxy.num1 === "") &&
+    !(stateProxy.num2 === "") &&
+    !(stateProxy.operator === "")
+  ) {
+    calculateResult();
+  } else {
+    const subDisplay = document.querySelector("#sub-display");
+    subDisplay.textContent = "";
+  }
 }
 
 function bracketsPressed() {
