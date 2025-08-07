@@ -19,7 +19,10 @@ const stateProxy = new Proxy(state, {
     }
 
     const display = document.querySelector("#display");
-    if (!(stateProxy.num1 === "") && stateProxy.num1.length > 12) {
+    if (
+      (!(stateProxy.num1 === "") && stateProxy.num1.length > 12) ||
+      (!(stateProxy.num2 === "") && stateProxy.num2.length > 12)
+    ) {
       display.classList.add("text-small");
     } else {
       display.classList.remove("text-small");
