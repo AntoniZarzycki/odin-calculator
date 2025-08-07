@@ -1,6 +1,6 @@
 let state = {
-  num1: undefined,
-  num2: undefined,
+  num1: "",
+  num2: "",
   operator: "",
 };
 
@@ -10,18 +10,15 @@ const stateProxy = new Proxy(state, {
   set(target, prop, value) {
     target[prop] = value;
     if (
-      !(stateProxy.num1 === undefined) &&
-      !(stateProxy.num2 === undefined) &&
+      !(stateProxy.num1 === "") &&
+      !(stateProxy.num2 === "") &&
       !(stateProxy.operator === "")
     ) {
       calculateResult();
     }
 
     const display = document.querySelector("#display");
-    if (
-      !(stateProxy.num1 === undefined) &&
-      stateProxy.num1.toString().length > 12
-    ) {
+    if (!(stateProxy.num1 === "") && stateProxy.num1.length > 12) {
       display.classList.add("text-small");
     } else {
       display.classList.remove("text-small");
@@ -49,13 +46,13 @@ function divide(num1, num2) {
 function operate(operator, num1, num2) {
   switch (operator) {
     case "+":
-      return add(num1, num2);
+      return add(Number(num1), Number(num2));
     case "-":
-      return subtract(num1, num2);
+      return subtract(Number(num1), Number(num2));
     case "*":
-      return multiply(num1, num2);
+      return multiply(Number(num1), Number(num2));
     case "/":
-      return divide(num1, num2);
+      return divide(Number(num1), Number(num2));
     default:
       return "Incorrect operator";
   }
@@ -147,23 +144,15 @@ function numberPressed(number) {
       clearAll();
     }
 
-    if (
-      !(stateProxy.num1 === undefined) &&
-      stateProxy.num1.toString().length >= 18
-    )
-      return;
+    if (!(stateProxy.num1 === "") && stateProxy.num1.length >= 18) return;
 
     num1Display.textContent += String(number);
-    stateProxy.num1 = Number(num1Display.textContent);
+    stateProxy.num1 = num1Display.textContent;
   } else {
-    if (
-      !(stateProxy.num2 === undefined) &&
-      stateProxy.num2.toString().length >= 18
-    )
-      return;
+    if (!(stateProxy.num2 === "") && stateProxy.num2.length >= 18) return;
 
     num2Display.textContent += String(number);
-    stateProxy.num2 = Number(num2Display.textContent);
+    stateProxy.num2 = num2Display.textContent;
   }
 }
 
@@ -202,12 +191,12 @@ function clearAll() {
 
   const num1Display = document.querySelector("#num1");
   num1Display.textContent = "";
-  stateProxy.num1 = undefined;
+  stateProxy.num1 = "";
   num1Display.classList.remove("text-green");
 
   const num2Display = document.querySelector("#num2");
   num2Display.textContent = "";
-  stateProxy.num2 = undefined;
+  stateProxy.num2 = "";
 
   const subDisplay = document.querySelector("#sub-display");
   subDisplay.textContent = "";
@@ -215,18 +204,18 @@ function clearAll() {
 }
 
 function clear() {
-  if (stateProxy.num2 || stateProxy.num2 === 0) {
+  if (stateProxy.num2 || stateProxy.num2 === "0") {
     const num2Display = document.querySelector("#num2");
     num2Display.textContent = "";
-    stateProxy.num2 = undefined;
+    stateProxy.num2 = "";
   } else if (stateProxy.operator) {
     const operatorDisplay = document.querySelector("#operator");
     operatorDisplay.textContent = "";
     stateProxy.operator = "";
-  } else if (stateProxy.num1 || stateProxy.num1 === 0) {
+  } else if (stateProxy.num1 || stateProxy.num1 === "0") {
     const num1Display = document.querySelector("#num1");
     num1Display.textContent = "";
-    stateProxy.num1 = undefined;
+    stateProxy.num1 = "";
     num1Display.classList.remove("text-green");
   }
 
@@ -259,11 +248,11 @@ function equalPressed() {
 
   const num2Display = document.querySelector("#num2");
   num2Display.textContent = "";
-  stateProxy.num2 = undefined;
+  stateProxy.num2 = "";
 
   const num1Display = document.querySelector("#num1");
-  num1Display.textContent = result;
-  stateProxy.num1 = result;
+  num1Display.textContent = String(result);
+  stateProxy.num1 = String(result);
 
   num1Display.classList.add("text-green");
 }
