@@ -184,6 +184,8 @@ function numberPressed(number) {
 }
 
 function operatorPressed(id) {
+  if (stateProxy.num1 === "()") return;
+
   const operatorDisplay = document.querySelector("#operator");
   const num1Display = document.querySelector("#num1");
   if (operatorDisplay.textContent) return;
