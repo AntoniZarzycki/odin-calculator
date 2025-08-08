@@ -211,6 +211,10 @@ function operatorPressed(id) {
       operatorDisplay.textContent = "/";
       stateProxy.operator = "/";
       break;
+    default:
+      operatorDisplay.textContent = id;
+      stateProxy.operator = id;
+      break;
   }
 }
 
@@ -358,3 +362,50 @@ function breakBrackets(num) {
     return num.substring(1, num.length - 1);
   }
 }
+
+document.addEventListener("keydown", (e) => {
+  e.preventDefault(); // Prevents inputting the button that was last clicked with a mouse if Enter is clicked
+
+  const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  const operators = ["+", "-", "*", "/"];
+
+  if (numbers.includes(e.key)) {
+    numberPressed(e.key);
+  } else if (operators.includes(e.key)) {
+    if (e.key === "-") {
+      if (!stateProxy.num1) return numberPressed("-");
+      if (!stateProxy.operator && stateProxy.num1 === "(")
+        return numberPressed("-");
+      if (stateProxy.operator && stateProxy.num2 === "(")
+        return numberPressed("-");
+      return operatorPressed(e.key);
+    } else operatorPressed(e.key);
+  } else {
+    switch (e.key) {
+      case "Backspace":
+        backspacePressed();
+        break;
+      case "Enter":
+        equalPressed();
+        break;
+      case ".":
+        pointPressed();
+        break;
+      case ",":
+        pointPressed();
+        break;
+      case "(":
+        bracketsPressed();
+        break;
+      case ")":
+        bracketsPressed();
+        break;
+      case "Escape":
+        clearAll();
+        break;
+      case "Delete":
+        clear();
+        break;
+    }
+  }
+});
