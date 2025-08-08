@@ -61,6 +61,9 @@ function divide(num1, num2) {
 }
 
 function operate(operator, num1, num2) {
+  num1 = breakBrackets(num1);
+  num2 = breakBrackets(num2);
+
   switch (operator) {
     case "+":
       return add(Number(num1), Number(num2));
@@ -98,7 +101,14 @@ document.addEventListener("click", (element) => {
   if (numbers.includes(id)) {
     numberPressed(convertToNumber(id));
   } else if (operators.includes(id)) {
-    operatorPressed(id);
+    if (id === "subtract") {
+      if (!stateProxy.num1) return numberPressed("-");
+      if (!stateProxy.operator && stateProxy.num1 === "(")
+        return numberPressed("-");
+      if (stateProxy.operator && stateProxy.num2 === "(")
+        return numberPressed("-");
+      return operatorPressed(id);
+    } else operatorPressed(id);
   } else {
     switch (id) {
       case "AC":
@@ -180,6 +190,9 @@ function operatorPressed(id) {
   if (!num1Display.textContent) return;
 
   num1Display.classList.remove("text-green");
+
+  if (stateProxy.num1.includes("(") && !stateProxy.num1.includes(")"))
+    numberPressed(")");
 
   switch (id) {
     case "add":
@@ -279,7 +292,19 @@ function backspacePressed() {
 }
 
 function bracketsPressed() {
-  console.log("Brackets");
+  if (stateProxy.operator) {
+    // for num2
+    if (!stateProxy.num2) return numberPressed("(");
+    if (stateProxy.num2.includes(")")) return;
+    if (stateProxy.num2.includes("(")) return numberPressed(")");
+    return;
+  } else {
+    //for num1
+    if (!stateProxy.num1) return numberPressed("(");
+    if (stateProxy.num1.includes(")")) return;
+    if (stateProxy.num1.includes("(")) return numberPressed(")");
+    return;
+  }
 }
 
 function pointPressed() {
@@ -308,7 +333,15 @@ function equalPressed() {
 }
 
 function calculateResult() {
-  result = operate(stateProxy.operator, stateProxy.num1, stateProxy.num2);
+  let num1 = stateProxy.num1;
+  let num2 = stateProxy.num2;
+
+  if (stateProxy.num2.includes("(") && !stateProxy.num2.includes(")"))
+    num2 += ")";
+
+  if (num2 === "()") return;
+
+  result = operate(stateProxy.operator, num1, num2);
 
   result = parseFloat(result.toFixed(8));
 
@@ -316,4 +349,12 @@ function calculateResult() {
 
   const subDisplay = document.querySelector("#sub-display");
   subDisplay.textContent = result;
+}
+
+function breakBrackets(num) {
+  if (!num.includes("(")) {
+    return num;
+  } else {
+    return num.substring(1, num.length - 1);
+  }
 }
