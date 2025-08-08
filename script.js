@@ -390,6 +390,9 @@ document.addEventListener("keydown", (e) => {
       case "Enter":
         equalPressed();
         break;
+      case "=":
+        equalPressed();
+        break;
       case ".":
         pointPressed();
         break;
