@@ -188,7 +188,7 @@ function operatorPressed(id) {
 
   const operatorDisplay = document.querySelector("#operator");
   const num1Display = document.querySelector("#num1");
-  if (operatorDisplay.textContent) return;
+  if (operatorDisplay.textContent) equalPressed();
   if (!num1Display.textContent) return;
 
   num1Display.classList.remove("text-green");
